@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import Editor from "./components/Editor";
 import Split from "react-split";
-import { onSnapshot, addDoc } from "firebase/firestore";//to keep on the code on async with our code and listen to changes in our firebase database and act accordingly to our local code like deleting request
+import { onSnapshot, addDoc, collection, deleteDoc, doc, setDoc, updateDoc  } from "firebase/firestore";//to keep on the code on async with our code and listen to changes in our firebase database and act accordingly to our local code like deleting request
 import { notesCollection } from "./firebase";
 export default function App()
 {
@@ -51,11 +51,10 @@ export default function App()
             return newArray;
         });
     }
-
-    function deleteNote(event, noteId)
+    async function deleteNote(noteId)
     {
-        event.stopPropagation();
-        setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
+        const docRef = doc(db, "notes", noteId)
+        await deleteDoc(docRef)
     }
 
 
