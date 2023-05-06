@@ -15,7 +15,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db =getFirestore(app)//to get the cloud firestore only 
+export const db =getFirestore(app)//to get the cloud firestore only 
 const notesCollection=collection(db,'notes')    //to get the notes collection and pass the cloud firestore to it
 const analytics = getAnalytics(app);
 
